@@ -1,50 +1,375 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سياسة الخصوصية - تطبيق Spark</title>
-    <style>
-        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
-        .container { background: #fff; padding: 30px; borderRadius: 12px; boxShadow: 0 4px 6px rgba(0,0,0,0.05); }
-        h1 { color: #111; borderBottom: 2px solid #007aff; paddingBottom: 10px; fontSize: 24px; }
-        h2 { color: #007aff; fontSize: 18px; marginTop: 25px; }
-        p, li { color: #555; fontSize: 14px; }
-        ul { paddingRight: 20px; }
-        .footer { marginTop: 4px; paddingTop: 20px; borderTop: 1px solid #eee; text-align: center; font-size: 12px; color: #999; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="سياسة الخصوصية لتطبيق امبير — إدارة المولدات والمشتركين والتحصيل." />
+  <title>سياسة الخصوصية — امبير</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --surface: #ffffff;
+      --text: #1a1c1e;
+      --text-muted: #5c6268;
+      --primary: #8a4600;
+      --primary-light: #e67e22;
+      --primary-soft: rgba(138, 70, 0, 0.09);
+      --border: #e4e6e9;
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(26, 28, 30, 0.06);
+      --max: 720px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Cairo", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.85;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    /* ── Header ── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #fff;
+      border-radius: calc(var(--radius) + 4px);
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    .hero-meta {
+      font-size: 14px;
+      opacity: 0.92;
+    }
+
+    /* ── Nav ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .toc-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+    }
+
+    .toc li {
+      counter-increment: toc;
+      margin-bottom: 8px;
+    }
+
+    .toc a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .toc a::before {
+      content: counter(toc) ". ";
+      color: var(--primary-light);
+    }
+
+    .toc a:hover {
+      color: var(--primary);
+    }
+
+    /* ── Sections ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-soft);
+    }
+
+    .card p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .card ul {
+      list-style: none;
+      margin: 8px 0 4px;
+    }
+
+    .card li {
+      position: relative;
+      padding: 8px 0 8px 0;
+      padding-inline-start: 22px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card li:last-child {
+      border-bottom: none;
+    }
+
+    .card li::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: 0;
+      top: 18px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary-light);
+    }
+
+    .card li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .note {
+      background: var(--primary-soft);
+      border-inline-start: 4px solid var(--primary-light);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .contact-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .contact-box a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(138, 70, 0, 0.15);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .contact-box a:hover {
+      background: rgba(138, 70, 0, 0.14);
+      transform: translateY(-1px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 28px 16px 8px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: var(--primary);
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 24px 20px;
+      }
+      .card {
+        padding: 20px 18px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>سياسة الخصوصية لتطبيق Spark</h1>
-        <p>تاريخ التحديث: يونيو 2026</p>
-        
-        <p>يلتزم تطبيق <strong>Spark</strong> بحماية خصوصية بياناتكم الإدارية والمالية. توضح هذه السياسة كيفية التعامل مع البيانات الصادرة والواردة داخل النظام.</p>
+  <div class="page">
+    <div class="wrap">
 
+      <header class="hero">
+        <div class="hero-badge">⚡ امبير — Amper</div>
+        <h1>سياسة الخصوصية</h1>
+        <p class="hero-meta">تاريخ التحديث: يونيو 2026 · الإصدار 1.0</p>
+      </header>
+
+      <nav class="toc" aria-label="فهرس المحتوى">
+        <p class="toc-title">محتويات الصفحة</p>
+        <ol>
+          <li><a href="#intro">مقدمة</a></li>
+          <li><a href="#data">البيانات التي نجمعها</a></li>
+          <li><a href="#permissions">صلاحيات الأجهزة</a></li>
+          <li><a href="#storage">التخزين والحماية</a></li>
+          <li><a href="#sharing">مشاركة البيانات</a></li>
+          <li><a href="#subscription">الاشتراك والدفع</a></li>
+          <li><a href="#deletion">حذف الحساب</a></li>
+          <li><a href="#contact">التواصل والدعم</a></li>
+        </ol>
+      </nav>
+
+      <section class="card" id="intro">
+        <h2>مقدمة</h2>
+        <p>
+          يلتزم تطبيق <strong>امبير</strong> (Amper) بحماية خصوصية بياناتكم الإدارية والمالية.
+          توضّح هذه السياسة كيفية جمع البيانات واستخدامها وتخزينها داخل النظام.
+        </p>
+        <p>
+          باستخدامك للتطبيق، فإنك توافق على الممارسات الموضّحة في هذه الصفحة.
+        </p>
+      </section>
+
+      <section class="card" id="data">
         <h2>1. البيانات التي نجمعها</h2>
+        <p>نجمع فقط البيانات اللازمة لتشغيل التطبيق ولا نبيع بياناتك لأغراض تسويقية:</p>
         <ul>
-            <li><strong>بيانات الحساب:</strong> الاسم، البريد الإلكتروني، ورقم الهاتف عند إعداد حسابات الموظفين والمشتركين.</li>
-            <li><strong>البيانات المالية والتشغيلية:</strong> سجلات الجباية، النثرية، المبالغ المستلمة، وصرفيات الكاز لإدارة المولدات الكهربائية.</li>
+          <li><strong>بيانات الحساب:</strong> الاسم، البريد الإلكتروني، رقم الهاتف، ومعرّف المستخدم.</li>
+          <li><strong>بيانات التشغيل:</strong> المشتركون، الأمبيرات، التحصيل، المصاريف، المواقع، الموظفون، وسجل العمليات.</li>
+          <li><strong>بيانات المشتركين:</strong> الأسماء، أرقام الهاتف (اختياري)، المبالغ، وسجل الدفعات.</li>
+          <li><strong>بيانات الاشتراك:</strong> الخطة وتاريخ انتهاء التفعيل لكل موقع — <strong>لا نخزّن</strong> أرقام البطاقات البنكية داخل التطبيق.</li>
         </ul>
+      </section>
 
-        <h2>2. صلاحيات الأجهزة (Permissions)</h2>
+      <section class="card" id="permissions">
+        <h2>2. صلاحيات الأجهزة</h2>
         <ul>
-            <li><strong>صلاحية البلوتوث والموقع (Android):</strong> تُستخدم حصراً للاقتران بالطابعات الحرارية المحمولة وطباعة وصولات القبض للمشتركين ميدانياً.</li>
-            <li><strong>المصادقة الحيوية (Face ID / Touch ID):</strong> تُستخدم محلياً على جهازك لتأمين شاشات الأرباح والصيرفة ولا يتم رفعها أو تخزينها على سيرفراتنا.</li>
+          <li><strong>الإنترنت:</strong> تسجيل الدخول، مزامنة البيانات، والدفع الإلكتروني.</li>
+          <li><strong>الميكروفون:</strong> المساعد الصوتي — فقط عند استخدامك له.</li>
+          <li><strong>البلوتوث والموقع (Android):</strong> للاقتران بالطابعات الحرارية وطباعة وصولات القبض ميدانياً.</li>
+          <li><strong>الشبكة المحلية:</strong> اكتشاف الطابعة وربطها على شبكة Wi‑Fi.</li>
+          <li><strong>المصادقة الحيوية (Face ID / Touch ID):</strong> تُستخدم محلياً على جهازك لتأمين شاشات الأرباح والصيرفة — لا تُرفع ولا تُخزَّن على خوادمنا.</li>
         </ul>
-
-        <h2>3. مشاركة وحماية البيانات</h2>
-        <p>يتم تخزين البيانات بشكل آمن عبر سحابة Firebase المشفرة. لا نقوم ببيع، مشاركة، أو تسريب أي بيانات مالية أو شخصية لأي جهات خارجية أو إعلانية.</p>
-
-        <h2>4. حذف الحساب والبيانات</h2>
-        <p>يمكن للموظفين والمسؤولين طلب حذف حساباتهم وبياناتهم بالكامل فوراً من خلال الانتقال إلى شاشة "الملف الشخصي -> إدارة الحساب" داخل التطبيق، أو عبر مراسلتنا مباشرة على البريد الإلكتروني المعتمد.</p>
-
-        <h2>5. التواصل والدعم</h2>
-        <p>لأي استفسار قانوني أو تقني، يرجى مراسلتنا عبر: <strong>support@spark.app</strong></p>
-
-        <div class="footer">
-            &copy; 2026 Spark App. جميع الحقوق محفوظة.
+        <div class="note">
+          لا نستخدم الصلاحيات لأغراض إعلانية أو تتبّع خارج نطاق التطبيق.
         </div>
+      </section>
+
+      <section class="card" id="storage">
+        <h2>3. التخزين والحماية</h2>
+        <p>
+          تُخزَّن البيانات بشكل آمن عبر سحabeة <strong>Firebase</strong> (Google Cloud) مع تشفير أثناء النقل والتخزين.
+          كما يُحفظ نسخ محلي على جهازك لتشغيل التطبيق دون اتصال دائم بالإنترنت، ثم تُزامَن عند توفر الشبكة.
+        </p>
+      </section>
+
+      <section class="card" id="sharing">
+        <h2>4. مشاركة البيانات</h2>
+        <p>
+          لا نقوم ببيع أو تأجير أو مشاركة بياناتكم المالية أو الشخصية مع جهات إعلانية.
+          قد نشارك البيانات فقط مع:
+        </p>
+        <ul>
+          <li><strong>مزودي الخدمة التقنية:</strong> مثل Firebase للاستضافة والمصادقة، وStripe لمعالجة الدفع.</li>
+          <li><strong>الالتزام القانوني:</strong> عند طلب رسمي من جهة مختصة وفقاً للقانون المعمول به.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="subscription">
+        <h2>5. الاشتراك والدفع</h2>
+        <p>
+          بعض ميزات الإضافة والتعديل تتطلب اشتراكاً نشطاً <strong>لكل موقع على حدة</strong>.
+          الدفع يتم عبر بوابة Stripe — بيانات البطاقة تُعالَج لدى مزود الدفع ولا تُخزَّن في تطبيق امبير.
+        </p>
+      </section>
+
+      <section class="card" id="deletion">
+        <h2>6. حذف الحساب والبيانات</h2>
+        <p>
+          يمكن للمسؤولين وطلب حذف الحساب من داخل التطبيق:
+        </p>
+        <ul>
+          <li><strong>الملف الشخصي ← إدارة الحساب ← حذف الحساب من قاعدة البيانات</strong></li>
+        </ul>
+        <p>
+          بعد التأكيد يُوقَف الوصول إلى حسابك ونحذف بياناتك من أنظمتنا خلال المدة المعقولة تقنياً.
+          للمساعدة في الحذف راسلنا عبر البريد أدناه.
+        </p>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>7. التواصل والدعm</h2>
+        <p>لأي استفسار قانوني أو تقني متعلق بالخصوصية:</p>
+        <div class="contact-box">
+          <a href="mailto:support@spark.app">✉ support@spark.app</a>
+        </div>
+        <div class="note" style="margin-top:16px">
+          <!-- غيّر البريد أعلاه إلى بريدك الفعلي إن كان مختلفاً -->
+          Package ID: <strong dir="ltr">iq.spark.app</strong>
+        </div>
+      </section>
+
+      <footer>
+        <p>© 2026 <strong>امبير</strong> — جميع الحقوق محفوظة.</p>
+      </footer>
+
     </div>
+  </div>
 </body>
 </html>
